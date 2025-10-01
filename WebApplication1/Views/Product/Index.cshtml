@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebApplication1.Models.Product>
+
+@{
+    ViewData["Title"] = "Liste des produits";
+}
+
+@if (Model != null && Model.Any())
+{
+    <div class="container mt-4">
+   
+
+        <div class="row">
+            @foreach (var product in Model)
+
+            {
+
+                var photoPath = "~/images/" + (product.ImagePath ?? "noimage.jpg");
+
+                
+                <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm w-100">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title"><strong>Nom:</strong> @product.Name</h5>
+                            <p class="card-text">
+                                <strong>Prix:</strong> @product.Price.ToString("0.00") <br />
+                                <strong>Quantité:</strong> @product.QteStock<br />
+                                <strong>Catégorie:</strong> @product.Category?.CategoryName
+                            </p>
+                        </div>
+                        <img class="card-img-top bg-light" src="@photoPath" asp-append-version="true" alt="Produit Image" />
+                        <div class="card-footer text-center bg-light">
+                        </div>
+                        @using Microsoft.AspNetCore.Identity
+                    @inject SignInManager<IdentityUser> SignInManager
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <div class="card-footer text-center bg-light">
+                            <a asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-outline-primary btn-sm">Détails</a>
+                            <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-outline-warning btn-sm mx-1"> Modifier</a>
+                            <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-outline-danger btn-sm"> Supprimer</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mt-4 text-center">
+        Aucun produit à afficher.
+    </div>
+}
