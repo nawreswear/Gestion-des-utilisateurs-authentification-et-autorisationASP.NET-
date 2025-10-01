@@ -1,5 +1,4 @@
-
- - Gestion des Articles avec ASP.NET Core et EF Core
+** Gestion des Articles avec ASP.NET Core et EF Core **
 
 ## Description
 This project is a web application . 
