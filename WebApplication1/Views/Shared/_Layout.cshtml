@@ -14,6 +14,9 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
+                <button class="btn btn-outline-primary">
+                    <img src="~/images/categorie-.png" alt="Ouvrir la liste des catégories" id="toggleMenu" class="img-fluid" style="max-width: 24px;" />
+                </button>
                 <a class="navbar-brand" asp-controller="Product" asp-action="Index">Gestion des Produits</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +34,8 @@
 
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Category" asp-action="Index">Liste Catégorie</a>
-                            <button class="btn btn-outline-primary">
-                                <img src="~/images/categorie.png" alt="Ouvrir la liste des catégories" id="toggleMenu" />
-                            </button>
+                           
+
                         </li>
                         @using Microsoft.AspNetCore.Identity
                         @inject SignInManager<IdentityUser> SignInManager
