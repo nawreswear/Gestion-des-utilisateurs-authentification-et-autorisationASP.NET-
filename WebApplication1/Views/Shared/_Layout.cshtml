@@ -31,6 +31,9 @@
 
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Category" asp-action="Index">Liste Catégorie</a>
+                            <button class="btn btn-outline-primary">
+                                <img src="~/images/categorie.png" alt="Ouvrir la liste des catégories" id="toggleMenu" />
+                            </button>
                         </li>
                         @using Microsoft.AspNetCore.Identity
                         @inject SignInManager<IdentityUser> SignInManager
