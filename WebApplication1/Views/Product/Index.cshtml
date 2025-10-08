@@ -43,6 +43,15 @@
                     </div>
                 </div>
             }
+            <div class="pagination">
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <a asp-action="Index" asp-route-categoryId="@ViewBag.CategoryId"
+                       asp-route-page="@i" class="btn btn-secondary m-1">
+                        @i
+                    </a>
+                }
+            </div>
         </div>
     </div>
 }
