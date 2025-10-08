@@ -2,117 +2,322 @@
     ViewData["Title"] = "Accueil";
 }
 
-<!-- HEADER SECTION -->
-<section class="hero-header d-flex align-items-center">
-    <div class="container text-center">
-        <h1 class="fw-bold display-4 mb-3">Gestion des Produits</h1>
-        <p class="lead text-muted mb-4">
-            Plateforme performante pour gérer vos produits, catégories et stocks en toute sécurité.
-        </p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a class="btn btn-dark btn-lg px-4" asp-controller="Product" asp-action="Index">Accéder aux Produits</a>
-            <a class="btn btn-outline-dark btn-lg px-4" asp-controller="Category" asp-action="Index">Explorer les Catégories</a>
-        </div>
-    </div>
-</section>
-
-<!-- WHY CHOOSE US -->
-<section class="why-us-section py-5 bg-white border-top border-bottom">
-    <div class="container">
-        <h2 class="text-center mb-5 fw-semibold">Pourquoi choisir notre application ?</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-2">🔐 Gestion des accès</h5>
-                        <p class="text-muted">
-                            Système d’authentification basé sur les rôles avec permissions précises pour Admins, Managers et Utilisateurs.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-2">📦 Suivi des stocks</h5>
-                        <p class="text-muted">
-                            Gérez vos produits avec facilité, contrôlez les stocks et surveillez les ruptures en temps réel.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-2">📁 Classement intelligent</h5>
-                        <p class="text-muted">
-                            Classez automatiquement vos produits dans des catégories hiérarchisées pour une meilleure organisation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CALL TO ACTION -->
-<section class="cta-section py-5 text-center text-white">
-    <div class="container">
-        <h3 class="fw-bold mb-3">Prêt à commencer ?</h3>
-        <p class="mb-4">Connectez-vous ou créez un compte pour commencer à gérer vos produits dès aujourd’hui.</p>
-        <a class="btn btn-outline-light btn-lg px-4" asp-controller="Account" asp-action="Login">Se connecter</a>
-    </div>
-</section>
-
-<!-- STYLES -->
 <style>
-    body {
-        font-family: 'Segoe UI', Roboto, sans-serif;
-        background-color: #f9fafb;
+    /* Refined color palette with sophisticated blue tones */
+    :root {
+        --primary-navy: #1e3a8a;
+        --primary-blue: #2563eb;
+        --accent-sky: #0ea5e9;
+        --light-bg: #eff6ff;
+        --text-primary: #1a202c;
+        --text-secondary: #4a5568;
     }
 
-    .hero-header {
-        min-height: 85vh;
-        background: #ffffff;
+    /* Hero Section - Sophisticated and Minimal */
+    .hero-elegant {
+        min-height: 75vh;
+        background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 50%, var(--accent-sky) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+        /* Subtle geometric pattern overlay */
+        .hero-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(30deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)), linear-gradient(150deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)), linear-gradient(30deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03)), linear-gradient(150deg, rgba(255, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.03) 87.5%, rgba(255, 255, 255, 0.03));
+            background-size: 80px 140px;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+    .hero-content {
+        max-width: 900px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-elegant h1 {
+        font-size: 3.75rem;
+        font-weight: 300;
+        color: white;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Elegant text highlight with subtle animation */
+    .text-elegant-highlight {
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+    }
+
+        .text-elegant-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 2px;
+        }
+
+    .hero-elegant .lead {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto 3rem;
+    }
+
+    /* Refined button styling without emojis */
+    .btn-elegant-primary {
+        background: white;
+        color: var(--primary-navy);
+        border: none;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        padding: 1rem 2.5rem;
+        border-radius: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+        .btn-elegant-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            background: #f8f9fa;
+            color: var(--primary-navy);
+        }
+
+    .btn-elegant-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        padding: 1rem 2.5rem;
+        border-radius: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+    }
+
+        .btn-elegant-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    /* Features Section - Minimalist and Professional */
+    .features-elegant {
+        padding: 6rem 0;
+        background: linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto 4rem;
+    }
+
+    /* Professional feature cards without emojis */
+    .feature-elegant {
+        background: white;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .feature-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-navy), var(--accent-sky));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-elegant:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
+            border-color: rgba(37, 99, 235, 0.15);
+        }
+
+    .feature-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
-        padding: 60px 20px;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 1.75rem;
+        font-weight: 600;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
     }
 
-    .why-us-section h2 {
+    .feature-icon-security {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: white;
+    }
+
+    .feature-icon-analytics {
+        background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+        color: white;
+    }
+
+    .feature-icon-organization {
+        background: linear-gradient(135deg, #0ea5e9 0%, #7dd3fc 100%);
+        color: white;
+    }
+
+    .feature-elegant:hover .feature-icon {
+        transform: scale(1.1) rotate(-5deg);
+    }
+
+    .feature-elegant h5 {
+        color: var(--text-primary);
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+    }
+
+    .feature-elegant p {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 0;
+        font-weight: 300;
+    }
+
+    /* Responsive Design */
+     (max-width: 768px) {
+        .hero-elegant h1
+
+    {
+        font-size: 2.5rem;
+    }
+
+    .hero-elegant .lead {
+        font-size: 1.1rem;
+    }
+
+    .hero-elegant {
+        min-height: 65vh;
+    }
+
+    .features-elegant {
+        padding: 4rem 0;
+    }
+
+    .section-title {
         font-size: 2rem;
     }
 
-    .card h5 {
-        font-size: 1.2rem;
-    }
-
-    .cta-section {
-        background: linear-gradient(to right, #111827, #1f2937);
-    }
-
-    .btn-dark {
-        background-color: #1f2937;
-        border-color: #1f2937;
-    }
-
-        .btn-dark:hover {
-            background-color: #111827;
-            border-color: #111827;
-        }
-
-    .btn-outline-light:hover {
-        background-color: #f3f4f6;
-        color: #111827;
-    }
-
-    (max-width: 768px) {
-        .hero-header
-
-    {
-        padding-top: 100px;
-        padding-bottom: 100px;
+    .btn-elegant-primary,
+    .btn-elegant-secondary {
+        padding: 0.875rem 2rem;
+        font-size: 0.95rem;
     }
 
     }
 </style>
+
+<!-- Hero Section -->
+<section class="hero-elegant d-flex align-items-center text-center">
+    <div class="container">
+        <div class="hero-content mx-auto">
+            <h1 class="mb-4">
+                Bienvenue sur <span class="text-elegant-highlight">Gestion des Produits</span>
+            </h1>
+            <p class="lead">
+                Une plateforme moderne et intuitive pour gérer efficacement vos produits et catégories avec élégance et simplicité.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a class="btn btn-elegant-primary" asp-controller="Product" asp-action="Index">
+                    Voir les Produits
+                </a>
+                <a class="btn btn-elegant-secondary" asp-controller="Category" asp-action="Index">
+                    Voir les Catégories
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-elegant">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Fonctionnalités Principales</h2>
+            <p class="section-subtitle">
+                Découvrez les outils puissants qui simplifient la gestion de votre inventaire
+            </p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-elegant">
+                    <div class="feature-icon feature-icon-security">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h5>Sécurité Intégrée</h5>
+                    <p>Système d'authentification robuste avec gestion des rôles : Administrateur, Manager et Utilisateur.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-elegant">
+                    <div class="feature-icon feature-icon-analytics">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h5>Tableaux Intuitifs</h5>
+                    <p>Interface claire et performante pour le suivi en temps réel de vos produits et de vos stocks.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-elegant">
+                    <div class="feature-icon feature-icon-organization">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h5>Organisation Claire</h5>
+                    <p>Système de catégorisation avancé pour une navigation fluide et une gestion optimale de votre catalogue.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

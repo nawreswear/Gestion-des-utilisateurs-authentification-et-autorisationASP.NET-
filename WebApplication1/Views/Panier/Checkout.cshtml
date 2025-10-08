@@ -1,64 +1,299 @@
 ﻿@model WebApplication1.ViewModels.OrderViewModel
 @{
-ViewData["Title"] = "CheckOut";
+    ViewData["Title"] = "CheckOut";
 }
-<h2>Passer la commande</h2>
-<form asp-action="Checkout" method="post">
-@Html.AntiForgeryToken()
-@if (TempData["ErrorMessage"] != null)
-{
-<div class="alert alert-danger">
-@TempData["ErrorMessage"]
+
+<style>
+    .checkout-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 60px 0;
+    }
+
+    .checkout-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .checkout-title {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 40px;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .checkout-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .checkout-card {
+        background: white;
+        border-radius: 16px;
+        padding: 35px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .checkout-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f7fafc;
+    }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+    .form-control-plaintext {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #667eea;
+        padding: 12px 0;
+    }
+
+    .alert {
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        border: none;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+    }
+
+    .alert-success {
+        background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+        color: white;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 10px;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+    .cart-summary-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+        .cart-summary-table thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+            .cart-summary-table thead th:first-child {
+                border-radius: 10px 0 0 10px;
+            }
+
+            .cart-summary-table thead th:last-child {
+                border-radius: 0 10px 10px 0;
+            }
+
+        .cart-summary-table tbody tr {
+            background: #f7fafc;
+            transition: all 0.3s ease;
+        }
+
+            .cart-summary-table tbody tr:hover {
+                background: #edf2f7;
+                transform: scale(1.02);
+            }
+
+        .cart-summary-table tbody td {
+            padding: 15px;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .cart-summary-table tbody tr td:first-child {
+            border-radius: 10px 0 0 10px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .cart-summary-table tbody tr td:last-child {
+            border-radius: 0 10px 10px 0;
+            font-weight: 700;
+            color: #764ba2;
+        }
+
+     (max-width: 768px) {
+        .checkout-grid
+
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-title {
+        font-size: 2rem;
+    }
+
+    .checkout-card {
+        padding: 25px;
+    }
+
+    .cart-summary-table {
+        font-size: 0.9rem;
+    }
+
+        .cart-summary-table thead th,
+        .cart-summary-table tbody td {
+            padding: 10px 8px;
+        }
+
+    }
+</style>
+
+<div class="checkout-container">
+    <div class="checkout-wrapper">
+        <h2 class="checkout-title">Passer la commande</h2>
+
+        <form asp-action="Checkout" method="post">
+            @Html.AntiForgeryToken()
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+            <div class="checkout-grid">
+                <div class="checkout-card">
+                    <h3 class="card-title">Informations de livraison</h3>
+
+                    <div class="form-group">
+                        <label for="Address">Adresse de livraison :</label>
+                        <input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" required placeholder="Entrez votre adresse complète" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PaymentMethod">Méthode de paiement :</label>
+                        <select class="form-control" id="PaymentMethod" name="PaymentMethod">
+                            <option value="CreditCard">Carte de crédit</option>
+                            <option value="Paypal">PayPal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Montant total :</label>
+                        <p class="form-control-plaintext">@Model.TotalAmount DH</p>
+                        <input type="hidden" name="TotalAmount" value="@Model.TotalAmount" />
+                    </div>
+
+                    @* Champs cachés pour les articles du panier *@
+                    @for (int i = 0; i < Model.CartItems.Count; i++)
+                    {
+                        <input type="hidden" name="CartItems[@i].ProductName" value="@Model.CartItems[i].ProductName" />
+                        <input type="hidden" name="CartItems[@i].Quantity" value="@Model.CartItems[i].Quantity" />
+                        <input type="hidden" name="CartItems[@i].Price" value="@Model.CartItems[i].Price" />
+                    }
+
+                    <button type="submit" class="btn-submit">Confirmer la commande</button>
+                </div>
+
+                <div class="checkout-card">
+                    <h3 class="card-title">Résumé du panier</h3>
+
+                    <table class="cart-summary-table">
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Qté</th>
+                                <th>Prix</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Price DH</td>
+                                    <td>@(item.Price* item.Quantity) DH</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-}
-@if (TempData["SuccessMessage"] != null)
-{
-<div class="alert alert-success">
-@TempData["SuccessMessage"]
-</div>
-}
-<div class="form-group">
-<label for="Address">Adresse de livraison :</label>
-<input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" required />
-</div>
-<div class="form-group">
-<label for="PaymentMethod">Méthode de paiement :</label>
-<select class="form-control" id="PaymentMethod" name="PaymentMethod">
-<option value="CreditCard">Carte de crédit</option>
-<option value="Paypal">PayPal</option>
-</select>
-</div>
-<div class="form-group">
-<label>Montant total :</label>
-<p class="form-control-plaintext">@Model.TotalAmount</p>
-<input type="hidden" name="TotalAmount" value="@Model.TotalAmount" />
-</div>
-@* Champs cachés pour les articles du panier *@
-@for (int i = 0; i < Model.CartItems.Count; i++) {
-<input type="hidden" name="CartItems[@i].ProductName" value="@Model.CartItems[i].ProductName" />
-<input type="hidden" name="CartItems[@i].Quantity" value="@Model.CartItems[i].Quantity" />
-<input type="hidden" name="CartItems[@i].Price" value="@Model.CartItems[i].Price" />
-}
-<button type="submit" class="btn btn-primary">Passer la commande</button>
-</form>
-<h3>Votre panier</h3>
-<table class="table">
-<thead>
-<tr>
-<th>Nom du produit</th>
-<th>Quantité</th>
-<th>Prix Unitaire</th>
-<th>Total Ligne</th>
-</tr>
-</thead>
-<tbody>
-@foreach (var item in Model.CartItems) {
-<tr>
-<td>@item.ProductName</td>
-<td>@item.Quantity</td>
-<td>@item.Price</td>
-<td>@(item.Price * item.Quantity)</td>
-</tr>
-}
-</tbody>
-</table>

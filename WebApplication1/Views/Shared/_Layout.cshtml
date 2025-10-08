@@ -11,68 +11,71 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrapMinty.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg custom-navbar" data-bs-theme="dark">
             <div class="container-fluid">
-                <!-- Toggle categories sidebar -->
-                <button class="btn btn-outline-primary">
+              
+                <button class="btn btn-outline-light toggle-btn">
                     <img src="~/images/categorie-.png" alt="Ouvrir la liste des catégories" id="toggleMenu" class="img-fluid" style="max-width: 24px;" />
                 </button>
 
-                <a class="navbar-brand" asp-controller="Product" asp-action="Index">Gestion des Produits</a>
-                
+                <a class="navbar-brand brand-text" asp-controller="Product" asp-action="Index">Gestion des Produits</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarColor01">
-                    <!-- Left navbar -->
+                   
+                  
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Product" asp-action="Index">Home</a>
+                            <a class="nav-link custom-nav-link" asp-controller="Product" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Category" asp-action="Index">Liste Catégorie</a>
+                            <a class="nav-link custom-nav-link" asp-controller="Category" asp-action="Index">Liste Catégorie</a>
                         </li>
                         @* Show create options only for Admin/Manager *@
                         @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Manager")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Product" asp-action="Create">Create Produit</a>
+                                <a class="nav-link custom-nav-link" asp-controller="Product" asp-action="Create">Create Produit</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Category" asp-action="Create">Create Catégorie</a>
+                                <a class="nav-link custom-nav-link" asp-controller="Category" asp-action="Create">Create Catégorie</a>
                             </li>
                         }
                     </ul>
 
-                    <!-- 🛒 Cart button -->
+                   
                     <ul class="navbar-nav ms-auto me-2">
                         <li class="nav-item">
-                            <a class="btn btn-outline-success position-relative" asp-controller="Panier" asp-action="Index">
+                            <a class="btn cart-btn position-relative" asp-controller="Panier" asp-action="Index">
                                 <img src="~/images/panier5.png" alt="Panier" style="width:50px;height:50px;" />
-                               
                             </a>
                         </li>
                     </ul>
 
-                    <!-- Search bar -->
-                    <form class="d-flex me-3" asp-area="" asp-controller="Product" asp-action="Search" method="get">
-                        <input class="form-control me-sm-2" type="search" placeholder="Search..." name="val" />
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                 
+                    <form class="d-flex me-3 search-form" asp-area="" asp-controller="Product" asp-action="Search" method="get">
+                        <input class="form-control me-sm-2 search-input" type="search" placeholder="Search..." name="val" />
+                        <button class="btn search-btn my-2 my-sm-0" type="submit">Search</button>
                     </form>
 
-                    <!-- Admin dropdown -->
+                   
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         <ul class="navbar-nav ms-3">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                <a class="nav-link dropdown-toggle custom-nav-link" data-bs-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="true" aria-expanded="false">Administration</a>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu custom-dropdown">
                                     <a class="dropdown-item" asp-controller="Admin" asp-action="CreateRole">Create Role</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">List Roles</a>
@@ -82,7 +85,7 @@
                     }
                 </div>
 
-                <!-- Login/Logout -->
+             
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ms-auto">
                         @if (SignInManager.IsSignedIn(User))
@@ -90,7 +93,7 @@
                             <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout" class="d-inline">
                                     <button type="submit"
-                                            class="btn btn-danger btn-sm px-3 py-1 rounded-pill text-white fw-bold logout-btn">
+                                            class="btn logout-btn">
                                         Logout @User.Identity.Name
                                     </button>
                                 </form>
@@ -100,10 +103,10 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link custom-nav-link" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link custom-nav-link" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>
@@ -111,34 +114,32 @@
             </div>
         </nav>
     </header>
-    <bosy>
+
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar for categories -->
-            <div class="col-md-2" id="sidebar" style="display: none;">
+         
+            <div class="col-md-2 custom-sidebar" id="sidebar" style="display: none;">
                 <ul class="list-group">
                     @await Html.PartialAsync("_CategoriesMenu", ViewData["Categories"])
                 </ul>
             </div>
 
-                <div class="container-fluid p-0">
-                    <div class="row g-0" style="min-height: 100vh;">
-                        <!-- Main content only -->
-                        <div class="col-12" id="mainContent">
-                            <main role="main" class="h-100 d-flex flex-column justify-content-center align-items-center">
-                                @RenderBody()
-                            </main>
-                        </div>
+            <div class="container-fluid p-0">
+                <div class="row g-0" style="min-height: 100vh;">
+                   
+                    <div class="col-12" id="mainContent">
+                        <main role="main" class="h-100 d-flex flex-column justify-content-center align-items-center main-content">
+                            @RenderBody()
+                        </main>
                     </div>
                 </div>
-
-
+            </div>
         </div>
     </div>
-    </body>
-    <footer class="border-top footer text-muted">
+
+    <footer class="custom-footer">
         <div class="container">
-            &copy; 2025 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="footer-link">Privacy</a>
         </div>
     </footer>
 
@@ -148,19 +149,237 @@
     <script src="~/js/CustomScript.js"></script>
     <script src="~/js/MonScript.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
-</body>
-<style>
-    .logout-btn {
-        background: linear-gradient(45deg, #dc3545, #ff6b6b);
-        border: none;
-        transition: all 0.3s ease;
-    }
 
-        .logout-btn:hover {
-            background: linear-gradient(45deg, #c82333, #ff4b4b);
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
+    <style>
+        /* Refined color palette with sophisticated blue tones */
+        :root {
+            --primary-navy: #1e3a8a;
+            --primary-blue: #2563eb;
+            --accent-sky: #0ea5e9;
+            --light-bg: #eff6ff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
         }
 
-</style>
+        body {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Custom Navbar Styling */
+        .custom-navbar {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 100%) !important;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+            padding: 1rem 0;
+        }
+
+        .brand-text {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .brand-text:hover {
+                transform: scale(1.05);
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .custom-nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .custom-nav-link:hover {
+                background: rgba(255, 255, 255, 0.15);
+                color: white !important;
+                transform: translateY(-2px);
+            }
+
+            .custom-nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: var(--accent-sky);
+                transition: all 0.3s ease;
+                transform: translateX(-50%);
+            }
+
+            .custom-nav-link:hover::after {
+                width: 80%;
+            }
+
+        /* Toggle Button */
+        .toggle-btn {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+            .toggle-btn:hover {
+                background: rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: scale(1.05);
+            }
+
+        /* Cart Button */
+        .cart-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 0.25rem 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+            .cart-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: var(--accent-sky);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(14, 165, 233, 0.3);
+            }
+
+        /* Search Form */
+        .search-form {
+            gap: 0.5rem;
+        }
+
+        .search-input {
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+            .search-input:focus {
+                border-color: var(--accent-sky);
+                box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+                background: white;
+            }
+
+        .search-btn {
+            background: var(--accent-sky);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .search-btn:hover {
+                background: #0284c7;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+            }
+
+        /* Custom Dropdown */
+        .custom-dropdown {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.15);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+
+            .custom-dropdown .dropdown-item {
+                padding: 0.75rem 1.5rem;
+                color: var(--text-primary);
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+                .custom-dropdown .dropdown-item:hover {
+                    background: linear-gradient(135deg, var(--primary-blue), var(--accent-sky));
+                    color: white;
+                    padding-left: 2rem;
+                }
+
+        /* Logout Button */
+        .logout-btn {
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .logout-btn:hover {
+                background: linear-gradient(135deg, #c82333, #ff4b4b);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+            }
+
+        /* Sidebar */
+        .custom-sidebar {
+            background: white;
+            box-shadow: 4px 0 12px rgba(30, 58, 138, 0.1);
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            background: transparent;
+        }
+
+        /* Footer */
+        .custom-footer {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            box-shadow: 0 -4px 12px rgba(30, 58, 138, 0.15);
+        }
+
+        .footer-link {
+            color: var(--accent-sky);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .footer-link:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+        /* Responsive adjustments */
+         (max-width: 768px) {
+            .custom-navbar
+
+        {
+            padding: 0.5rem 0;
+        }
+
+        .brand-text {
+            font-size: 1.2rem;
+        }
+
+        .search-form {
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+        }
+
+        }
+    </style>
+</body>
 </html>

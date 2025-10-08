@@ -4,24 +4,198 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Supprimer</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 40px 0;
+    }
 
-<h3>Êtes-vous sûr de vouloir supprimer ceci ?</h3>
-<div>
-    <h4>Catégorie</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="CategoryId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Retour</a>
-    </form>
+    .delete-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        animation: fadeInUp 0.5s ease-out;
+    }
+
+     fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .delete-container h1 {
+        color: #dc3545;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .delete-container h3 {
+        color: #495057;
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: 30px;
+        text-align: center;
+        padding: 20px;
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        border-radius: 8px;
+    }
+
+    .delete-container h4 {
+        color: #343a40;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .delete-container hr {
+        display: none;
+    }
+
+    .delete-container dl.row {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+
+    .delete-container dt {
+        color: #6c757d;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+
+    .delete-container dd {
+        color: #212529;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+
+    .delete-container form {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .delete-container .btn-danger {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        border: none;
+        color: white;
+        padding: 12px 32px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    }
+
+        .delete-container .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+            background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+        }
+
+        .delete-container .btn-danger:active {
+            transform: translateY(0);
+        }
+
+    .delete-container a {
+        color: #6c757d;
+        text-decoration: none;
+        padding: 12px 32px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        border: 2px solid #dee2e6;
+        background: white;
+    }
+
+        .delete-container a:hover {
+            color: #495057;
+            background: #f8f9fa;
+            border-color: #adb5bd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+     (max-width: 768px) {
+        .delete-container
+
+    {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+
+    .delete-container h1 {
+        font-size: 1.75rem;
+    }
+
+    .delete-container h3 {
+        font-size: 1.1rem;
+    }
+
+    .delete-container form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .delete-container .btn-danger,
+    .delete-container a {
+        width: 100%;
+        text-align: center;
+    }
+
+    }
+</style>
+
+<div class="delete-container">
+    <h1>Supprimer</h1>
+
+    <h3>Êtes-vous sûr de vouloir supprimer ceci ?</h3>
+
+    <div>
+        <h4>Catégorie</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="CategoryId" />
+            <input type="submit" value="Supprimer" class="btn btn-danger" />
+            <a asp-action="Index">Annuler</a>
+        </form>
+    </div>
 </div>

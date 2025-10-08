@@ -3,68 +3,272 @@
 @{
     ViewData["Title"] = "Create";
 }
-<h1>Create</h1>
-<h4>Produit</h4>
-<hr />
-<div class="row">
-<div class="col-md-4">
-@*To support file upload set the form element enctype="multipart/form-data" *@
-<form enctype="multipart/form-data" asp-action="Create">
-<div asp-validation-summary="All" class="text-danger"></div>
-<div class="form-group">
-<label asp-for="Name" class="control-label"></label>
-<input asp-for="Name" class="form-control" />
-<span asp-validation-for="Name" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="Price" class="control-label"></label>
-<input asp-for="Price" class="form-control" />
-<span asp-validation-for="Price" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="QteStock" class="control-label"></label>
-<input asp-for="QteStock" class="form-control" />
-<span asp-validation-for="QteStock" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="CategoryId" class="control-label"></label>
-<select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
-</div>
-            <span asp-validation-for="ImagePath" class="text-danger">
 
-</span>
-            @* asp-for tag helper is set to "ImagePath" property. "ImagePath" property type is IFormFile so at runtime asp.net core generates
-file upload control (input type=file)*@
-            <div class="form-group row">
-                <label asp-for="ImagePath" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    <div class="custom-file">
-                        <input asp-for="ImagePath" class="form-control custom-file-input">
-                        <label class="custom-file-label">Choose File...</label>
-                    </div>
-                </div>
-            </div>
+<style>
+    /* Professional and Elegant Styling */
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 2rem 0;
+    }
+
+        .page-header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .page-header h4 {
+            color: #7f8c8d;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        padding: 3rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+    .form-group {
+        margin-bottom: 1.75rem;
+    }
+
+        .form-group label {
+            color: #34495e;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            letter-spacing: 0.3px;
+        }
+
+    .form-control {
+        border: 2px solid #e0e6ed;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+            background-color: white;
+            outline: none;
+        }
+
+        .form-control:hover {
+            border-color: #bdc3c7;
+        }
+
+    select.form-control {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233498db' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        padding-right: 2.5rem;
+    }
+
+    .custom-file {
+        position: relative;
+        border: 2px dashed #bdc3c7;
+        border-radius: 10px;
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .custom-file:hover {
+            border-color: #3498db;
+            background-color: #ebf5fb;
+        }
+
+    .custom-file-input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .custom-file-label {
+        color: #7f8c8d;
+        font-weight: 500;
+        margin: 0;
+        text-align: center;
+        display: block;
+        pointer-events: none;
+    }
+
+        .custom-file-label::before {
+            content: "📁 ";
+            font-size: 1.2rem;
+        }
+
+    .text-danger {
+        color: #e74c3c;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: block;
+    }
+
+    .btn {
+        padding: 0.75rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            transform: translateY(-2px);
+        }
+
+    .btn-outline-danger {
+        background: white;
+        color: #e74c3c;
+        border: 2px solid #e74c3c;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.1);
+    }
+
+        .btn-outline-danger:hover {
+            background: #e74c3c;
+            color: white;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+            transform: translateY(-2px);
+        }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid #ecf0f1;
+    }
+
+    hr {
+        display: none;
+    }
+
+     (max-width: 768px) {
+        .form-card
+
+    {
+        padding: 2rem 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    }
+</style>
+
+<div class="page-header">
+    <h1>Créer un Produit</h1>
+    <h4>Ajouter un nouveau produit à votre catalogue</h4>
+</div>
+
+<div class="form-container">
+    <div class="form-card">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            
-                    <a asp-action="Index" class="btn btn-sm btn-outline-danger">Retour</a>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Entrez le nom du produit" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" placeholder="0.00" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="QteStock" class="control-label"></label>
+                <input asp-for="QteStock" class="form-control" placeholder="Quantité en stock" />
+                <span asp-validation-for="QteStock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option value="">-- Sélectionnez une catégorie --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="ImagePath" class="form-control custom-file-input">
+                    <label class="custom-file-label">Choisir une image...</label>
+                </div>
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" value="Créer le Produit" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-danger">Annuler</a>
             </div>
         </form>
     </div>
 </div>
 
-
-@*@section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
-@*This script is required to display the selected file in the file upload element*@
 @section Scripts {
     <script>
         $(document).ready(function () {
-        $('.custom-file-input').on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).next('.custom-file-label').html(fileName);
-        });
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName || 'Choisir une image...');
+            });
         });
     </script>
 }

@@ -3,29 +3,207 @@
 @{
     var roleId = ViewBag.roleId;
 }
-<form method="post">
-    <div class="card">
-        <div class="card-header">
-            <h2>Add or remove users from this role</h2>
+
+<style>
+    .role-management-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 40px 20px;
+    }
+
+    .role-management-card {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+     fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .role-card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+
+        .role-card-header h2 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+    .role-card-body {
+        padding: 30px;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+        .role-card-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .role-card-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .role-card-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+    .user-checkbox-item {
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: white;
+    }
+
+        .user-checkbox-item:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .user-checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .user-checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #374151;
+            user-select: none;
+        }
+
+        .user-checkbox-item input[type="checkbox"]:checked ~ label {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+    .role-card-footer {
+        padding: 25px 30px;
+        background: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .role-btn {
+        padding: 12px 32px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .role-btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+        .role-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            color: white;
+        }
+
+    .role-btn-secondary {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+    }
+
+        .role-btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+     (max-width: 768px) {
+        .role-management-container
+
+    {
+        padding: 20px 10px;
+    }
+
+    .role-card-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .role-card-body {
+        padding: 20px;
+    }
+
+    .role-card-footer {
+        flex-direction: column;
+    }
+
+    .role-btn {
+        width: 100%;
+    }
+
+    }
+</style>
+
+<div class="role-management-container">
+    <form method="post">
+        <div class="role-management-card">
+            <div class="role-card-header">
+                <h2>Ajouter ou retirer des utilisateurs de ce rôle</h2>
+            </div>
+            <div class="role-card-body">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="user-checkbox-item">
+                        <input type="hidden" asp-for="@Model[i].UserId" />
+                        <input type="hidden" asp-for="@Model[i].UserName" />
+                        <input asp-for="@Model[i].IsSelected" type="checkbox" id="user-@i" />
+                        <label asp-for="@Model[i].IsSelected" for="user-@i">
+                            @Model[i].UserName
+                        </label>
+                    </div>
+                }
+            </div>
+            <div class="role-card-footer">
+                <input type="submit" value="Mettre à jour" class="role-btn role-btn-primary" />
+                <a asp-action="EditRole" asp-route-id="@roleId" class="role-btn role-btn-secondary">Annuler</a>
+            </div>
         </div>
-        <div class="card-body">
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <div class="form-check m-1">
-                    <input type="hidden" asp-for="@Model[i].UserId" />
-                    <input type="hidden" asp-for="@Model[i].UserName" />
-                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
-                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
-                        @Model[i].UserName
-                    </label>
-                </div>
-            }
-        </div>
-        <div class="card-footer">
-            <input type="submit" value="Update" class="btn btn-primary"
-                   style="width:auto" />
-            <a asp-action="EditRole" asp-route-id="@roleId"
-               class="btn btn-primary" style="width:auto">Cancel</a>
-        </div>
-    </div>
-</form>
+    </form>
+</div>

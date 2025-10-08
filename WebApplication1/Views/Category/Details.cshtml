@@ -4,21 +4,165 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<div>
-    <h4>Catégorie</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.CategoryId">Edit</a> |
-    <a asp-action="Index" class="btn btn-sm btn-outline-danger">Retour</a>
+    .details-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .page-title {
+        color: #2c3e50;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        text-align: center;
+        letter-spacing: -0.5px;
+    }
+
+    .details-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        padding: 40px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .details-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+    .card-header {
+        color: #34495e;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #3498db;
+    }
+
+    .details-row {
+        display: flex;
+        padding: 20px 0;
+        border-bottom: 1px solid #ecf0f1;
+        align-items: center;
+    }
+
+        .details-row:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        flex: 0 0 200px;
+        color: #7f8c8d;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .detail-value {
+        flex: 1;
+        color: #2c3e50;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .action-buttons {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+        font-size: 0.95rem;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+    .btn-back {
+        background: white;
+        color: #e74c3c;
+        border: 2px solid #e74c3c;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.2);
+    }
+
+        .btn-back:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+     (max-width: 768px) {
+        .details-card
+
+    {
+        padding: 25px;
+    }
+
+    .details-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .detail-label {
+        flex: none;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    }
+</style>
+
+<div class="details-container">
+    <h1 class="page-title">Détails de la Catégorie</h1>
+
+    <div class="details-card">
+        <h4 class="card-header">Informations de la Catégorie</h4>
+
+        <div class="details-row">
+            <dt class="detail-label">
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </dt>
+            <dd class="detail-value">
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a asp-action="Edit" asp-route-id="@Model?.CategoryId" class="btn-custom btn-edit">Modifier</a>
+        <a asp-action="Index" class="btn-custom btn-back">Retour à la Liste</a>
+    </div>
 </div>

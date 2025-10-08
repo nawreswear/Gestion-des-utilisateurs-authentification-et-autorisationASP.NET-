@@ -1,33 +1,40 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
-using WebApplication1.Models;
 using WebApplication1.Models.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Ajouter les services au conteneur
 builder.Services.AddControllersWithViews();
 
-// Register DbContext
+// Enregistrer DbContext avec pool pour SQL Server
 builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProductDBConnection"))
 );
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+// Ajouter Identity avec EF stores
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();  // Utile pour les tokens (reset password etc.)
+
+// Configurer les options du mot de passe
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Default Password settings.
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
+    // Tu peux ajouter d'autres réglages ici si besoin
 });
-// Register repositories
+
+// Enregistrer les repositories (injection de dépendances)
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-// Build the app
+
+// Construire l'application
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configurer le pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -38,13 +45,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();
+
+app.UseAuthentication();   // Authentification avant autorisation
 app.UseAuthorization();
-//app.UseSession();
-//app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.Run();

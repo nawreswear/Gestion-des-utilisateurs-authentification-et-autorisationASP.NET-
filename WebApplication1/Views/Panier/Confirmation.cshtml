@@ -2,7 +2,14 @@
 
 <div class="container my-5">
     <div class="text-center mb-5">
-        <h1 class="text-success mb-3">✔ Votre commande a été validée avec succès !</h1>
+        <!-- Enhanced success message with animated checkmark icon -->
+        <div class="success-icon-wrapper">
+            <svg class="success-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle class="success-icon-circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="success-icon-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+        </div>
+        <h1 class="success-title mb-3">Votre commande a été validée avec succès !</h1>
         <p class="lead">Merci pour votre achat, <strong>@Model.CustomerName</strong> ! Votre commande a bien été enregistrée.</p>
     </div>
 
@@ -21,7 +28,7 @@
 
         <div class="detail-row d-flex justify-content-between py-2 border-bottom">
             <span class="detail-label fw-bold">Montant total :</span>
-            <span class="detail-value text-success fw-bold">@Model.TotalAmount.ToString("0.00") Dt</span>
+            <span class="detail-value text-success fw-bold">@Model.TotalAmount.ToString("0.00") DH</span>
         </div>
 
         <div class="detail-row d-flex justify-content-between py-2">
@@ -37,25 +44,211 @@
 </div>
 
 <style>
+    /* Added gradient background and modern styling */
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+
+    /* Animated success checkmark icon */
+    .success-icon-wrapper {
+        margin: 0 auto 2rem;
+        width: 80px;
+        height: 80px;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        animation: scaleIn 0.5s ease-in-out;
+    }
+
+    .success-icon-circle {
+        stroke: #10b981;
+        stroke-width: 2;
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    .success-icon-check {
+        stroke: #10b981;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: strokeCheck 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+
+     strokeCircle {
+        100%
+
+    {
+        stroke-dashoffset: 0;
+    }
+
+    }
+
+     strokeCheck {
+        100%
+
+    {
+        stroke-dashoffset: 0;
+    }
+
+    }
+
+     scaleIn {
+        0%
+
+    {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    }
+
+    /* Enhanced success title styling */
+    .success-title {
+        color: #10b981;
+        font-weight: 700;
+        font-size: 2rem;
+        animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+
+    .lead {
+        color: #4b5563;
+        font-size: 1.1rem;
+        animation: fadeInUp 0.6s ease-out 0.5s both;
+    }
+
+     fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    /* Modern card design for order details */
     .order-details {
         max-width: 700px;
         margin: 0 auto;
+        background: white !important;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        animation: fadeInUp 0.6s ease-out 0.7s both;
     }
 
-    .detail-row span.detail-label {
-        color: #555;
+        .order-details h2 {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.5rem;
+            border-bottom: 3px solid #10b981;
+            padding-bottom: 0.75rem;
+        }
+
+    /* Enhanced detail rows with hover effects */
+    .detail-row {
+        transition: all 0.3s ease;
+        padding: 1rem 0.5rem !important;
+        border-radius: 8px;
     }
 
-    .detail-row span.detail-value {
-        font-weight: 500;
-        color: #333;
-    }
+        .detail-row:hover {
+            background: #f9fafb;
+            padding-left: 1rem !important;
+        }
+
+        .detail-row span.detail-label {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .detail-row span.detail-value {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 1rem;
+        }
 
     .text-success {
-        color: #28a745 !important;
+        color: #10b981 !important;
+        font-size: 1.25rem !important;
     }
 
-    .text-primary {
-        color: #0d6efd !important;
+    /* Modern button styling with gradients */
+    .btn-primary {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+    .btn-outline-secondary {
+        border: 2px solid #d1d5db;
+        color: #6b7280;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+        .btn-outline-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+            color: #4b5563;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+    /* Responsive design improvements */
+     (max-width: 768px) {
+        .success-title
+
+    {
+        font-size: 1.5rem;
+    }
+
+    .order-details {
+        padding: 1.5rem !important;
+    }
+
+    .btn-lg {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
     }
 </style>

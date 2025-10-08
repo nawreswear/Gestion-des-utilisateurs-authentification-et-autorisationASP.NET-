@@ -5,55 +5,293 @@
     ViewBag.Title = "All Roles";
 }
 
-<h1>All Roles</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
 
-@if (Model.Any())
-{
-    <a class="btn btn-primary mb-3" asp-action="CreateRole" asp-controller="Admin">
-        Add new role
-    </a>
+    .roles-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
 
-    @foreach (var role in Model)
+    .page-title {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .add-role-btn {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+        .add-role-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: #764ba2;
+        }
+
+    .role-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .role-card .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .role-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .role-card .card-title {
+            color: #2d3748;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-card form {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+        color: white;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 101, 101, 0.4);
+            color: white;
+        }
+
+    .confirm-delete-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #fff5f5;
+        padding: 0.75rem 1rem;
+        border-radius: 25px;
+        border: 2px solid #feb2b2;
+    }
+
+        .confirm-delete-container span {
+            color: #c53030;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+    .btn-yes {
+        background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.25rem;
+        border-radius: 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
+        }
+
+    .btn-no {
+        background: #e2e8f0;
+        color: #4a5568;
+        border: none;
+        padding: 0.5rem 1.25rem;
+        border-radius: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-no:hover {
+            background: #cbd5e0;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+    .empty-state-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        border: none;
+        text-align: center;
+    }
+
+        .empty-state-card .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .empty-state-card .card-body {
+            padding: 3rem 2rem;
+        }
+
+        .empty-state-card .card-title {
+            color: #4a5568;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .empty-state-card .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .empty-state-card .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            }
+
+     (max-width: 768px) {
+        .page-title
+
     {
-        <div class="card mb-3">
-            <div class="card-header">Role Id : @role.Id</div>
-            <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
+        font-size: 2rem;
+    }
+
+    .role-card form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-edit, .btn-delete {
+        width: 100%;
+        text-align: center;
+    }
+
+    .confirm-delete-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    }
+</style>
+
+<div class="roles-container">
+    <h1 class="page-title">Tous les Rôles</h1>
+
+    @if (Model.Any())
+    {
+        <a class="add-role-btn" asp-action="CreateRole" asp-controller="Admin">
+            Ajouter un nouveau rôle
+        </a>
+
+        @foreach (var role in Model)
+        {
+            <div class="role-card card">
+                <div class="card-header">ID du Rôle : @role.Id</div>
+                <div class="card-body">
+                    <h5 class="card-title">@role.Name</h5>
+                </div>
+
+                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                    <a asp-controller="Admin" asp-action="EditRole"
+                       asp-route-id="@role.Id" class="btn-edit">Modifier</a>
+
+                    <span id="confirmDeleteSpan_@role.Id" class="confirm-delete-container" style="display:none">
+                        <span>Êtes-vous sûr de vouloir supprimer ?</span>
+                        <button type="submit" class="btn-yes">Oui</button>
+                        <a href="#" class="btn-no"
+                           onclick="confirmDelete('@role.Id', false)">Non</a>
+                    </span>
+
+                    <span id="deleteSpan_@role.Id">
+                        <a href="#" class="btn-delete"
+                           onclick="confirmDelete('@role.Id', true)">Supprimer</a>
+                    </span>
+                </form>
             </div>
-
-            <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
-                <a asp-controller="Admin" asp-action="EditRole"
-                   asp-route-id="@role.Id" class="btn btn-primary">Edit</a>
-
-                <span id="confirmDeleteSpan_@role.Id" style="display:none">
-                    <span>Are you sure you want to delete?</span>
-                    <button type="submit" class="btn btn-danger">Yes</button>
-                    <a href="#" class="btn btn-secondary"
-                       onclick="confirmDelete('@role.Id', false)">No</a>
-                </span>
-
-                <span id="deleteSpan_@role.Id">
-                    <a href="#" class="btn btn-danger"
-                       onclick="confirmDelete('@role.Id', true)">Delete</a>
-                </span>
-            </form>
+        }
+    }
+    else
+    {
+        <div class="empty-state-card card">
+            <div class="card-header">
+                Aucun rôle créé pour le moment
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Utilisez le bouton ci-dessous pour créer un rôle</h5>
+                <a class="btn btn-primary" asp-controller="Admin" asp-action="CreateRole">
+                    Créer un Rôle
+                </a>
+            </div>
         </div>
     }
-}
-else
-{
-    <div class="card">
-        <div class="card-header">
-            No roles created yet
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Use the button below to create a role</h5>
-            <a class="btn btn-primary" asp-controller="Admin" asp-action="CreateRole">
-                Create Role
-            </a>
-        </div>
-    </div>
-}
+</div>
 
 @section Scripts {
     <script>
@@ -63,7 +301,7 @@ else
 
             if (isConfirmed) {
                 deleteSpan.style.display = "none";
-                confirmDeleteSpan.style.display = "inline";
+                confirmDeleteSpan.style.display = "inline-flex";
             } else {
                 deleteSpan.style.display = "inline";
                 confirmDeleteSpan.style.display = "none";
