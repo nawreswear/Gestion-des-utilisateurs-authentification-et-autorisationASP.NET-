@@ -23,7 +23,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Register repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 // Build the app
 var app = builder.Build();
 
