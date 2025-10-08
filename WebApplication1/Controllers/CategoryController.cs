@@ -21,13 +21,18 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+
             var categories = _repository.GetAll();
+            ViewData["Categories"] = categories;
             return View(categories);
         }
 
         // GET: Category/Details/5
         public IActionResult Details(int id)
         {
+
+            var categories = _repository.GetAll();
+            ViewData["Categories"] = categories;
             var category = _repository.GetById(id);
             if (category == null)
                 return NotFound();
@@ -38,6 +43,8 @@ namespace WebApplication1.Controllers
         // GET: Category/Create
         public IActionResult Create()
         {
+            var categories = _repository.GetAll();
+            ViewData["Categories"] = categories;
             return View();
         }
 
@@ -57,6 +64,8 @@ namespace WebApplication1.Controllers
         // GET: Category/Edit/5
         public IActionResult Edit(int id)
         {
+            var categories = _repository.GetAll();
+            ViewData["Categories"] = categories;
             var category = _repository.GetById(id);
             if (category == null)
                 return NotFound();
@@ -83,6 +92,8 @@ namespace WebApplication1.Controllers
         // GET: Category/Delete/5
         public IActionResult Delete(int id)
         {
+            var categories = _repository.GetAll();
+            ViewData["Categories"] = categories;
             var category = _repository.GetById(id);
             if (category == null)
                 return NotFound();

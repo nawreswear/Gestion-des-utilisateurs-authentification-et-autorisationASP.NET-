@@ -31,6 +31,8 @@ namespace WebApplication1.Controllers
         // GET: Product/Details/5
         public IActionResult Details(int id)
         {
+            var categories = _categoryRepository.GetAll();
+            ViewData["Categories"] = categories;
             var product = _repository.GetById(id);
             if (product == null)
                 return NotFound();
@@ -41,6 +43,8 @@ namespace WebApplication1.Controllers
         // GET: Product/Create
         public IActionResult Create()
         {
+            var categories = _categoryRepository.GetAll();
+            ViewData["Categories"] = categories;
             ViewBag.CategoryId = new SelectList(_categoryRepository.GetAll(), "CategoryId", "CategoryName");
             return View();
         }
@@ -89,6 +93,8 @@ namespace WebApplication1.Controllers
         // GET: Product/Edit/5
         public ActionResult Edit(int id)
         {
+            var categories = _categoryRepository.GetAll();
+            ViewData["Categories"] = categories;
             ViewBag.CategoryId = new SelectList(_categoryRepository.GetAll(),
             "CategoryId"
             ,
@@ -187,6 +193,8 @@ namespace WebApplication1.Controllers
         // GET: Product/Delete/5
         public IActionResult Delete(int id)
         {
+            var categories = _categoryRepository.GetAll();
+            ViewData["Categories"] = categories;
             var product = _repository.GetById(id);
             if (product == null)
                 return NotFound();
@@ -229,6 +237,7 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public IActionResult Index(int? categoryId, int page = 1)
         {
+            
             int pageSize = 4; // Nombre de produits par page
             var categories = _categoryRepository.GetAll();
             // Passer les catégories à la vue
