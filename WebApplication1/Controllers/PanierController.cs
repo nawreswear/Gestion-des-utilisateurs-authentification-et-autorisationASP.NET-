@@ -122,7 +122,7 @@ namespace WebApplication1.Controllers
                     Quantity = item.quantite,
                     Price = item.Prod.Price
                 }).ToList(),
-                TotalAmount = totalAmount
+                TotalAmount = (float)totalAmount
             };
             return View(viewModel);
         }
@@ -147,7 +147,7 @@ namespace WebApplication1.Controllers
                     Quantity = item.quantite,
                     Price = item.Prod.Price
                 }).ToList();
-                model.TotalAmount = ListeCart.Instance.GetSubTotal();
+                model.TotalAmount = (float)ListeCart.Instance.GetSubTotal();
                 var order = new Order
                 {
                     CustomerName = user.UserName,
