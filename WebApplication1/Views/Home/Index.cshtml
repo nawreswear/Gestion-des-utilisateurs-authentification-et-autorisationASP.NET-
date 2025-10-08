@@ -2,81 +2,116 @@
     ViewData["Title"] = "Accueil";
 }
 
-<!-- HERO SECTION -->
-<section class="hero text-white d-flex align-items-center">
+<!-- HEADER SECTION -->
+<section class="hero-header d-flex align-items-center">
     <div class="container text-center">
-        <h1 class="display-4 fw-bold fade-in">Bienvenue sur <span class="text-accent">Gestion des Produits</span></h1>
-        <p class="lead mb-4 fade-in">Une plateforme simple, rapide et efficace pour gérer vos produits et catégories.</p>
-        <div class="d-flex justify-content-center flex-wrap gap-3 fade-in">
-            <a class="btn btn-accent btn-lg px-4 fw-bold shadow" asp-controller="Product" asp-action="Index">Voir les Produits</a>
-            <a class="btn btn-outline-light btn-lg px-4 fw-bold" asp-controller="Category" asp-action="Index">Voir les Catégories</a>
+        <h1 class="fw-bold display-4 mb-3">Gestion des Produits</h1>
+        <p class="lead text-muted mb-4">
+            Plateforme performante pour gérer vos produits, catégories et stocks en toute sécurité.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a class="btn btn-dark btn-lg px-4" asp-controller="Product" asp-action="Index">Accéder aux Produits</a>
+            <a class="btn btn-outline-dark btn-lg px-4" asp-controller="Category" asp-action="Index">Explorer les Catégories</a>
         </div>
     </div>
 </section>
 
+<!-- WHY CHOOSE US -->
+<section class="why-us-section py-5 bg-white border-top border-bottom">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-semibold">Pourquoi choisir notre application ?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-2">🔐 Gestion des accès</h5>
+                        <p class="text-muted">
+                            Système d’authentification basé sur les rôles avec permissions précises pour Admins, Managers et Utilisateurs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-2">📦 Suivi des stocks</h5>
+                        <p class="text-muted">
+                            Gérez vos produits avec facilité, contrôlez les stocks et surveillez les ruptures en temps réel.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-2">📁 Classement intelligent</h5>
+                        <p class="text-muted">
+                            Classez automatiquement vos produits dans des catégories hiérarchisées pour une meilleure organisation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- MODERN STYLES -->
+<!-- CALL TO ACTION -->
+<section class="cta-section py-5 text-center text-white">
+    <div class="container">
+        <h3 class="fw-bold mb-3">Prêt à commencer ?</h3>
+        <p class="mb-4">Connectez-vous ou créez un compte pour commencer à gérer vos produits dès aujourd’hui.</p>
+        <a class="btn btn-outline-light btn-lg px-4" asp-controller="Account" asp-action="Login">Se connecter</a>
+    </div>
+</section>
+
+<!-- STYLES -->
 <style>
-    :root {
-        --accent-color: #6366f1;
-    }
-
-    /* ✅ Supprimer tout dépassement d'écran */
     body {
-        overflow-x: hidden;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        background-color: #f9fafb;
     }
 
-    .text-accent {
-        color: var(--accent-color);
-    }
-
-    .btn-accent {
-        background-color: var(--accent-color);
-        color: #fff;
-    }
-
-        .btn-accent:hover {
-            background-color: #4f46e5;
-            color: #fff;
-        }
-
-    .hero {
-        min-height: 80vh;
-        background: linear-gradient(135deg, #0f172a, #1e293b);
+    .hero-header {
+        min-height: 85vh;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
         padding: 60px 20px;
     }
 
-    .features .icon-box {
-        background-color: #f9fafb;
-        transition: all 0.3s ease;
+    .why-us-section h2 {
+        font-size: 2rem;
     }
 
-        .features .icon-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    .card h5 {
+        font-size: 1.2rem;
+    }
+
+    .cta-section {
+        background: linear-gradient(to right, #111827, #1f2937);
+    }
+
+    .btn-dark {
+        background-color: #1f2937;
+        border-color: #1f2937;
+    }
+
+        .btn-dark:hover {
+            background-color: #111827;
+            border-color: #111827;
         }
 
-    .cta {
-        background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    .btn-outline-light:hover {
+        background-color: #f3f4f6;
+        color: #111827;
     }
 
-    /* ✅ Correction animation */
-    .fade-in {
-        opacity: 0;
-        animation: fadeInUp 1s ease-out forwards;
-    }
-
-     fadeInUp {
-        from
+    (max-width: 768px) {
+        .hero-header
 
     {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        padding-top: 100px;
+        padding-bottom: 100px;
     }
 
     }
