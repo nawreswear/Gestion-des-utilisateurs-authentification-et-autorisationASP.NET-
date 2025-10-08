@@ -21,12 +21,12 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Product
-        [AllowAnonymous]
+       /* [AllowAnonymous]
         public IActionResult Index()
         {
             var products = _repository.GetAll();
             return View(products);
-        }
+        }*/
 
         // GET: Product/Details/5
         public IActionResult Details(int id)
@@ -226,7 +226,7 @@ namespace WebApplication1.Controllers
              var result = ProductRepository.FindByName(val);
              return View("Index", result);
          }*/
-
+        [AllowAnonymous]
         public IActionResult Index(int? categoryId, int page = 1)
         {
             int pageSize = 4; // Nombre de produits par page
