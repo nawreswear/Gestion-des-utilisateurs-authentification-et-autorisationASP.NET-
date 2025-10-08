@@ -121,12 +121,18 @@
                 </ul>
             </div>
 
-            <!-- Main content -->
-            <div class="col-md-9" id="mainContent">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
+                <div class="container-fluid p-0">
+                    <div class="row g-0" style="min-height: 100vh;">
+                        <!-- Main content only -->
+                        <div class="col-12" id="mainContent">
+                            <main role="main" class="h-100 d-flex flex-column justify-content-center align-items-center">
+                                @RenderBody()
+                            </main>
+                        </div>
+                    </div>
+                </div>
+
+
         </div>
     </div>
     </body>
