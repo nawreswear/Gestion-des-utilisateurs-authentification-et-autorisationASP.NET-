@@ -22,7 +22,7 @@
                 </button>
 
                 <a class="navbar-brand" asp-controller="Product" asp-action="Index">Gestion des Produits</a>
-
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -53,9 +53,8 @@
                     <ul class="navbar-nav ms-auto me-2">
                         <li class="nav-item">
                             <a class="btn btn-outline-success position-relative" asp-controller="Panier" asp-action="Index">
-                                <img src="~/images/panier2.png" alt="Panier" style="width:24px;height:24px;" />
-                                Mon panier
-                                
+                                <img src="~/images/panier5.png" alt="Panier" style="width:50px;height:50px;" />
+                               
                             </a>
                         </li>
                     </ul>
@@ -89,10 +88,14 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <form method="post" asp-controller="Account" asp-action="Logout">
-                                    <button type="submit" class="nav-link btn btn-link py-0">Logout @User.Identity.Name</button>
+                                <form method="post" asp-controller="Account" asp-action="Logout" class="d-inline">
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm px-3 py-1 rounded-pill text-white fw-bold logout-btn">
+                                        Logout @User.Identity.Name
+                                    </button>
                                 </form>
                             </li>
+
                         }
                         else
                         {
@@ -108,7 +111,7 @@
             </div>
         </nav>
     </header>
-
+    <bosy>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar for categories -->
@@ -126,7 +129,7 @@
             </div>
         </div>
     </div>
-
+    </body>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -140,4 +143,18 @@
     <script src="~/js/MonScript.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<style>
+    .logout-btn {
+        background: linear-gradient(45deg, #dc3545, #ff6b6b);
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .logout-btn:hover {
+            background: linear-gradient(45deg, #c82333, #ff4b4b);
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
+        }
+
+</style>
 </html>

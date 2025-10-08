@@ -36,7 +36,10 @@
                         {
                             <div class="card-footer text-center bg-light">
                             <a asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-outline-primary btn-sm">Détails</a>
-                                <a asp-controller="Panier" asp-action="AddProduct" class="btn btn-outline-secondary" asp-routeid="@product.ProductId">Ajouter Au Panier</a>
+                                <a asp-controller="Panier" asp-action="AddProduct" asp-route-id="@product.ProductId" class="btn btn-outline-secondary">
+                                    Ajouter Au Panier
+                                </a>
+
                             </div>
                         }
                     </div>

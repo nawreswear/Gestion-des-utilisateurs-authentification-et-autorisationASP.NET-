@@ -27,14 +27,21 @@ namespace WebApplication1.Controllers
             ViewBag.total = ListeCart.Instance.GetSubTotal();
             return View();
         }
-        public ActionResult AddProduct(int id)
+        /* public ActionResult AddProduct(int id)
+         {
+             Product pp = productRepository.GetById(id);
+             ListeCart.Instance.AddItem(pp);
+             ViewBag.Liste = ListeCart.Instance.Items;
+             ViewBag.total = ListeCart.Instance.GetSubTotal();
+             return View();
+         }*/
+        public IActionResult AddProduct(int id)
         {
             Product pp = productRepository.GetById(id);
             ListeCart.Instance.AddItem(pp);
-            ViewBag.Liste = ListeCart.Instance.Items;
-            ViewBag.total = ListeCart.Instance.GetSubTotal();
-            return View();
+            return RedirectToAction("Index", "Product");
         }
+
         [HttpPost]
         public ActionResult PlusProduct(int id)
         {

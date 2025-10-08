@@ -1,22 +1,61 @@
 ﻿@model WebApplication1.Models.Order
-<h1>Votre commande a été validée avec succès !</h1>
-<p>Merci pour votre achat, @Model.CustomerName ! Votre commande a bien été enregistrée.</p>
-<div class="order-details">
-    <h2>Récapitulatif de votre commande</h2>
-    <div class="detail-row">
-        <span class="detail-label">Numéro de commande :</span>
-        <span class="detail-value">@Model.Id</span>
+
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="text-success mb-3">✔ Votre commande a été validée avec succès !</h1>
+        <p class="lead">Merci pour votre achat, <strong>@Model.CustomerName</strong> ! Votre commande a bien été enregistrée.</p>
     </div>
-    <div class="detail-row">
-        <span class="detail-label">Date :</span>
-        <span class="detail-value">@Model.OrderDate.ToString("dd/MM/yyyy à HH:mm")</span>
+
+    <div class="order-details p-4 bg-light shadow rounded">
+        <h2 class="mb-4 text-primary">Récapitulatif de votre commande</h2>
+
+        <div class="detail-row d-flex justify-content-between py-2 border-bottom">
+            <span class="detail-label fw-bold">Numéro de commande :</span>
+            <span class="detail-value">@Model.Id</span>
+        </div>
+
+        <div class="detail-row d-flex justify-content-between py-2 border-bottom">
+            <span class="detail-label fw-bold">Date :</span>
+            <span class="detail-value">@Model.OrderDate.ToString("dd/MM/yyyy à HH:mm")</span>
+        </div>
+
+        <div class="detail-row d-flex justify-content-between py-2 border-bottom">
+            <span class="detail-label fw-bold">Montant total :</span>
+            <span class="detail-value text-success fw-bold">@Model.TotalAmount.ToString("0.00") Dt</span>
+        </div>
+
+        <div class="detail-row d-flex justify-content-between py-2">
+            <span class="detail-label fw-bold">Adresse de livraison :</span>
+            <span class="detail-value">@Model.Address</span>
+        </div>
     </div>
-    <div class="detail-row">
-        <span class="detail-label">Montant total :</span>
-        <span class="detail-value">@Model.TotalAmount</span>
-    </div>
-    <div class="detail-row">
-        <span class="detail-label">Adresse de livraison :</span>
-        <span class="detail-value"> @Model.Address.</span>
+
+    <div class="text-center mt-5">
+        <a href="~/Product/Index" class="btn btn-primary btn-lg me-2">Retour aux produits</a>
+        <a href="~/Home/Index" class="btn btn-outline-secondary btn-lg">Accueil</a>
     </div>
 </div>
+
+<style>
+    .order-details {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .detail-row span.detail-label {
+        color: #555;
+    }
+
+    .detail-row span.detail-value {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .text-success {
+        color: #28a745 !important;
+    }
+
+    .text-primary {
+        color: #0d6efd !important;
+    }
+</style>

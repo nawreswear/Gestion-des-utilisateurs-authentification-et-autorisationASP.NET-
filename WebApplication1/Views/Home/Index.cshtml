@@ -1,8 +1,109 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Accueil";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- HERO SECTION -->
+<section class="hero text-white d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold fade-in">Bienvenue sur <span class="text-accent">Gestion des Produits</span></h1>
+        <p class="lead mb-4 fade-in">Une plateforme simple, rapide et efficace pour gérer vos produits et catégories.</p>
+        <div class="d-flex justify-content-center gap-3 fade-in">
+            <a class="btn btn-accent btn-lg px-4 fw-bold shadow" asp-controller="Product" asp-action="Index">Voir les Produits</a>
+            <a class="btn btn-outline-light btn-lg px-4 fw-bold" asp-controller="Category" asp-action="Index">Voir les Catégories</a>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features py-5 bg-white">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="icon-box shadow-sm p-4 rounded h-100">
+                    <div class="icon text-primary fs-1 mb-3">🔐</div>
+                    <h5 class="fw-bold">Sécurité Avancée</h5>
+                    <p>Authentification avec rôles sécurisés : Admin, Manager, Utilisateur.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="icon-box shadow-sm p-4 rounded h-100">
+                    <div class="icon text-success fs-1 mb-3">📦</div>
+                    <h5 class="fw-bold">Gestion Produits</h5>
+                    <p>Créez, éditez et supprimez vos produits facilement depuis un tableau clair.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="icon-box shadow-sm p-4 rounded h-100">
+                    <div class="icon text-info fs-1 mb-3">🗂️</div>
+                    <h5 class="fw-bold">Organisation</h5>
+                    <p>Classez vos produits par catégories pour une navigation plus fluide.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+
+
+<!-- MODERN STYLES -->
+<style>
+    :root {
+        --accent-color: #6366f1;
+    }
+
+    .text-accent {
+        color: var(--accent-color);
+    }
+
+    .btn-accent {
+        background-color: var(--accent-color);
+        color: #fff;
+    }
+
+        .btn-accent:hover {
+            background-color: #4f46e5;
+            color: #fff;
+        }
+
+    .hero {
+        min-height: 80vh;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        padding: 60px 20px;
+    }
+
+    .features .icon-box {
+        background-color: #f9fafb;
+        transition: all 0.3s ease;
+    }
+
+        .features .icon-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+    .cta {
+        background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    }
+
+    /* Fade-in animations */
+    .fade-in {
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+    }
+
+   fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
